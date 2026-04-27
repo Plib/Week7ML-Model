@@ -4,46 +4,63 @@ on:
   workflow_dispatch
 
 jobs:
+
   job1:
     name: job1
     runs-on: ubuntu-latest
     steps:
-    - name: setup python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
-    - name: check version of python
-      run: python --version
-    - name: check version of pip
-      run: pip --version
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: check version of python
+        run: python --version
+
+      - name: check version of pip
+        run: pip --version
       
   job2:
     name: Checkout code
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - run: |
-        echo ${{ github.workspace}}
-        echo $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+
+      - name: show workspace
+        run: |
+          echo ${{ github.workspace }}
+          echo $GITHUB_WORKSPACE
 
   job3:
     name: data_pipeline
     runs-on: ubuntu-latest
     steps:
-    - name: clean_data
-      uses: actions/checkout@v4 
-      run: |
-        pwd
-        ls -al
-        pwd
-        cd ModelCleaning
-        pip install pandas
-        python cleandata.py
+      - uses: actions/checkout@v4
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: clean data
+        run: |
+          cd ModelCleaning
+          ls -al
+          pip install pandas
+          python cleandata.py
   
   job4:
     name: train_test_dataset
     runs-on: ubuntu-latest
     steps:
-    run: |
-        pip install scikit-learn joblib
-        python ModelCleaning.train_test_dataset.py
+      - uses: actions/checkout@v4
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: train/test split
+        run: |
+          pip install scikit-learn joblib
+          python ModelCleaning/train_test_dataset.py
