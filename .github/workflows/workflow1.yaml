@@ -24,7 +24,7 @@ jobs:
     name: Checkout code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: show workspace
         run: |
@@ -35,7 +35,7 @@ jobs:
     name: data_pipeline
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: setup python
         uses: actions/setup-python@v4
@@ -53,7 +53,7 @@ jobs:
     name: train_test_dataset
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@6
 
       - name: setup python
         uses: actions/setup-python@v4
