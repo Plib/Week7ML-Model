@@ -47,7 +47,7 @@ jobs:
           cd ModelCleaning
           ls -al
           pip install pandas
-          python cleandata.py
+          python Cleandata.py
   
   job4:
     name: train_test_dataset
@@ -62,5 +62,6 @@ jobs:
 
       - name: train/test split
         run: |
+          cd ModelCleaning
           pip install scikit-learn joblib
           python ModelCleaning/train_test_dataset.py
